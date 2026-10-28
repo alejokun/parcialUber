@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <main class="auth-shell">
+    <section class="brand">
+      <div class="brand-mark">U</div>
+      <h1>Crear cuenta</h1>
+      <p>Regístrate para comenzar a usar la plataforma.</p>
+    </section>
+
+    <ion-card>
+      <ion-card-content>
+        <form (ngSubmit)="submit()">
+          <ion-item lines="full">
+            <ion-label position="stacked">Nombre completo</ion-label>
+            <ion-input name="name" [(ngModel)]="form.name" required type="text"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Correo electrónico</ion-label>
+            <ion-input name="email" [(ngModel)]="form.email" required type="email"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input name="phone" [(ngModel)]="form.phone" required type="tel"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input name="password" [(ngModel)]="form.password" required type="password"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Tipo de cuenta</ion-label>
+            <ion-select name="role" [(ngModel)]="form.role" interface="popover">
+              <ion-select-option value="client">Cliente</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          @if (errorMessage) {
+            <ion-text color="danger">
+              <p class="error-message">{{ errorMessage }}</p>
+            </ion-text>
+          }
+
+          <ion-button expand="block" type="submit"
+            [disabled]="isLoading || !form.name || !form.email || !form.phone || !form.password">
+            @if (isLoading) {
+              <ion-spinner name="crescent"></ion-spinner>
+            } @else {
+              Crear cuenta
+            }
+          </ion-button>
+        </form>
+        <p class="register-prompt">
+          ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </main>
+</ion-content>

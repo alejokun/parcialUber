@@ -1,0 +1,7 @@
+{
+  "name": "uber_proyect",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

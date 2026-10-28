@@ -1,0 +1,60 @@
+<ion-content [fullscreen]="true">
+  <main class="auth-shell">
+    <section class="brand">
+      <div class="brand-mark">U</div>
+      <p class="eyebrow">PLATAFORMA DE MOVILIDAD</p>
+      <h1>Viaja fácil.</h1>
+      <p>Conecta con conductores verificados cerca de ti.</p>
+    </section>
+
+    <ion-card>
+      <ion-card-content>
+        <h2>Iniciar sesión</h2>
+        <p class="form-intro">Usa tu correo o teléfono para continuar.</p>
+
+        <form (ngSubmit)="submit()">
+          <ion-item lines="full">
+            <ion-label position="stacked">Correo o teléfono</ion-label>
+            <ion-input
+              name="login"
+              [(ngModel)]="login"
+              autocomplete="username"
+              required
+              type="text">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input
+              name="password"
+              [(ngModel)]="password"
+              autocomplete="current-password"
+              required
+              type="password">
+            </ion-input>
+          </ion-item>
+
+          @if (errorMessage) {
+            <ion-text color="danger">
+              <p class="error-message">{{ errorMessage }}</p>
+            </ion-text>
+          }
+
+          <ion-button expand="block" type="submit" [disabled]="isLoading || !login || !password">
+            @if (isLoading) {
+              <ion-spinner name="crescent"></ion-spinner>
+            } @else {
+              Continuar
+            }
+          </ion-button>
+        </form>
+
+        <p class="register-prompt">
+          ¿Aún no tienes cuenta?
+          <a routerLink="/register">Regístrate</a>
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </main>
+</ion-content>
