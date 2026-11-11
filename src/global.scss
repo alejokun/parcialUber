@@ -17,7 +17,6 @@
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-@import "leaflet/dist/leaflet.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -35,4 +34,89 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* Tema claro fijo estilo Uber (sin modo oscuro del sistema) */
+
+:root {
+  --ion-color-primary: #000;
+  --ion-color-primary-contrast: #fff;
+  --ion-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ion-background-color: #fff;
+  --ion-text-color: #111;
+  --ion-color-medium: #6b6b6b;
+  --uber-blue: #276ef1;
+  --uber-surface: #f6f6f6;
+  --uber-border: #e8e8e8;
+  --uber-radius: 14px;
+  --uber-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+}
+
+body { -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { letter-spacing: -.02em; }
+
+/* Barra superior */
+ion-toolbar { --background: #000; --color: #fff; --border-width: 0; }
+ion-toolbar ion-title { font-weight: 700; letter-spacing: -.02em; }
+ion-toolbar ion-segment { --background: #1c1c1c; }
+ion-header::after { display: none; }
+
+/* Botones */
+ion-button { --border-radius: 12px; text-transform: none; font-weight: 600; letter-spacing: 0; min-height: 44px; }
+ion-button[size="large"] { min-height: 54px; font-size: 1.05rem; }
+ion-button[color="dark"] { --background: #000; --color: #fff; --background-activated: #333; }
+ion-button[fill="outline"] { --border-width: 1.5px; }
+ion-toolbar ion-button { --color: #fff; min-height: 36px; }
+
+/* Campos de formulario */
+ion-item {
+  --background: var(--uber-surface);
+  --border-radius: 12px;
+  --border-width: 0;
+  --inner-border-width: 0;
+  --min-height: 56px;
+  border-radius: 12px;
+}
+ion-item:focus-within { outline: 2px solid #000; }
+ion-list { background: transparent; }
+ion-list ion-item { border-radius: 0; --background: transparent; --border-width: 0 0 1px 0; --border-color: var(--uber-border); }
+
+/* Tarjetas */
+ion-card { margin: 12px 0; border-radius: var(--uber-radius); box-shadow: var(--uber-shadow); border: 1px solid var(--uber-border); }
+ion-card-title { font-size: 1.1rem; font-weight: 700; }
+ion-badge { border-radius: 8px; padding: 4px 8px; font-weight: 600; }
+
+/* Segmentos */
+ion-segment { --background: var(--uber-surface); border-radius: 12px; }
+ion-segment-button { --border-radius: 10px; --indicator-color: #000; --color-checked: #fff; text-transform: none; font-weight: 600; min-height: 40px; }
+
+/* Pantalla con mapa a pantalla completa + panel inferior */
+ion-content.map-page { --overflow: hidden; --padding-start: 0; --padding-end: 0; }
+.map-fill { position: absolute; inset: 0; }
+.sheet {
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  width: min(100%, 520px); max-height: 62%; overflow-y: auto; z-index: 1000;
+  background: #fff; border-radius: 24px 24px 0 0; padding: 14px 20px calc(20px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, .22);
+  animation: sheet-up .28s ease-out;
+}
+@keyframes sheet-up { from { transform: translate(-50%, 40px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+.sheet::before { content: ''; display: block; width: 44px; height: 5px; border-radius: 3px; background: #d4d4d4; margin: 0 auto 14px; }
+.sheet h2 { margin: 0 0 10px; font-size: 1.35rem; font-weight: 800; }
+.sheet .row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--uber-border); font-size: .95rem; }
+.sheet .row:last-of-type { border-bottom: 0; }
+.sheet .dot { width: 12px; height: 12px; flex: none; border-radius: 50%; }
+.sheet .dot.a { background: #000; } .sheet .dot.b { background: var(--uber-blue); border-radius: 2px; }
+.sheet .price { font-size: 2.2rem; font-weight: 800; text-align: center; margin: 10px 0 4px; letter-spacing: -.03em; }
+.sheet .price small { display: block; font-size: .85rem; font-weight: 500; color: var(--ion-color-medium); letter-spacing: 0; }
+.sheet .tip { color: var(--ion-color-medium); font-size: .85rem; margin: 8px 0; line-height: 1.4; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0 12px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; border: 1px solid var(--uber-border); background: var(--uber-surface); padding: 9px 14px;
+  border-radius: 20px; font-size: .84rem; font-weight: 500; cursor: pointer; font-family: inherit; color: #111;
+  transition: background .15s, color .15s, transform .1s;
+}
+.chip:hover { background: #eaeaea; }
+.chip:active { background: #000; color: #fff; transform: scale(.97); }
+
+/* Toast */
+ion-toast { --border-radius: 12px; font-weight: 500; }
